@@ -5,24 +5,24 @@ namespace Mt.Flow.Sharp.Parser.AST.Statements
 {
     public class AssignmentStatement : IStatement
     {
-        private string variable;
-        private IExpression expression;
+        public string Variable { get; private set; }
+        public IExpression Expression { get; private set; }
 
         public AssignmentStatement(string variable, IExpression expression)
         {
-            this.variable = variable;
-            this.expression = expression;
+            Variable = variable;
+            Expression = expression;
         }
 
         public void Execute()
         {
-            var result = expression.Eval();
-            Variables.Set(variable, result);
+            var result = Expression.Eval();
+            Variables.Set(Variable, result);
         }
 
         public override string ToString()
         {
-            return $"{variable} = {expression}";
+            return $"{Variable} = {Expression}";
         }
     }
 }

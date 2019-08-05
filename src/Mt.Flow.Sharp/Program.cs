@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Mt.Flow.Sharp.Compilers.JS;
 using Mt.Flow.Sharp.Parser;
+using System;
+using System.IO;
+using System.Text;
 
 namespace Mt.Flow.Sharp
 {
@@ -15,29 +12,46 @@ namespace Mt.Flow.Sharp
         {
             try
             {
-                string input = File.ReadAllText("sort.fsh", Encoding.UTF8);
-                var tokens = new Lexer(input).Tokenize();
-                foreach (var token in tokens)
+#if DEBUG
+                if (0 == args.Length)
                 {
-                    Console.WriteLine(token);
+                    args = new string[1]
+                    {
+                        Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "sort.fsh")
+                    };
                 }
+#endif
 
-                /*Console.WriteLine("======================");
-                var expressions = new Parser.Parser(tokens).Parse();
-                foreach (var expression in expressions)
+                foreach (var arg in args)
                 {
-                    Console.WriteLine(expression);
-                }*/
+                    var inputPath = arg;
 
-                Console.WriteLine("======================");
-                var program = new Parser.Parser(tokens).Parse();
-                Console.WriteLine(program);
+                    string input = File.ReadAllText(inputPath, Encoding.UTF8);
+                    var tokens = new Lexer(input).Tokenize();
+                    foreach (var token in tokens)
+                    {
+                        Console.WriteLine(token);
+                    }
 
-                /*Console.WriteLine("======================");
-                program.Accept(new FunctionAdder());
-                program.Accept(new VariablePrinter());
-                program.Accept(new AssignValidator());
-                program.Execute();*/
+                    Console.WriteLine("======================");
+                    var program = new Parser.Parser(tokens).Parse();
+                    Console.WriteLine(program);
+
+                    //Console.WriteLine("======================");
+                    //program.Execute();
+
+                    Console.WriteLine("======================");
+
+                    var compiler = new CompilerJs(4);
+                    var jscode = compiler.Compile(program);
+
+                    var dirPath = Path.GetDirectoryName(inputPath);
+                    var outputName = Path.GetFileNameWithoutExtension(inputPath) + ".js";
+                    var outputPath = Path.Combine(dirPath, outputName);
+                    File.WriteAllText(outputPath, jscode, Encoding.UTF8);
+
+                    Console.Write(jscode);
+                }
             }
             catch (Exception ex)
             {

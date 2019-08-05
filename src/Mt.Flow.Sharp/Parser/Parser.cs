@@ -84,7 +84,7 @@ namespace Mt.Flow.Sharp.Parser
         {
             var token = Consume(TokenType.Indent);
             int indentvalue = (token as TokenIndent).Value;
-            var block = new BlockStatement(indentvalue);
+            var block = new BlockStatement();
             while (!LookMatch(0, TokenType.Outdent))
             {
                 block.Add(Statement());
@@ -322,7 +322,7 @@ namespace Mt.Flow.Sharp.Parser
             }
             if (LookMatch(0, TokenType.LBracket))
             {
-                return ArrayInit();
+                return ArrayDeclare();
             }
             if (LookMatch(0, TokenType.Word) && LookMatch(1, TokenType.LBracket))
             {
@@ -346,7 +346,7 @@ namespace Mt.Flow.Sharp.Parser
             throw new Exception("Unknown expression.");
         }
 
-        private IExpression ArrayInit()
+        private IExpression ArrayDeclare()
         {
             var elements = new List<IExpression>();
             Consume(TokenType.LBracket);
@@ -355,7 +355,7 @@ namespace Mt.Flow.Sharp.Parser
                 elements.Add(Expression());
                 Match(TokenType.Comma);
             }
-            return new ArrayExpression(elements); 
+            return new ArrayDaclarationExpression(elements); 
         }
 
         private ArrayAccessExpression ArrayElement()

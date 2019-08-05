@@ -4,21 +4,21 @@ namespace Mt.Flow.Sharp.Parser.AST.Statements
 {
     public class FunctionStatement : IStatement
     {
-        public FunctionalExpression function;
+        public FunctionalExpression Function { get; private set; }
 
         public FunctionStatement(FunctionalExpression function)
         {
-            this.function = function;
+            Function = function;
         }
 
         public void Execute()
         {
-            function.Eval();
+            Function.Eval();
         }
 
         public override string ToString()
         {
-            return function.ToString();
+            return Function.ToString();
         }
     }
 }

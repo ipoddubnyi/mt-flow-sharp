@@ -5,9 +5,9 @@ namespace Mt.Flow.Sharp.Parser.AST.Statements
 {
     public class IfStatement : IStatement
     {
-        private IExpression expression;
-        private IStatement ifStatement;
-        private IStatement elseStatement;
+        public IExpression expression { get; private set; }
+        public IStatement ifStatement { get; private set; }
+        public IStatement elseStatement { get; private set; }
 
         public IfStatement(IExpression expression, IStatement ifStatement, IStatement elseStatement)
         {

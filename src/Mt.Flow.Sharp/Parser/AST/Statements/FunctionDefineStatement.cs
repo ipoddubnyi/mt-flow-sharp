@@ -6,25 +6,25 @@ namespace Mt.Flow.Sharp.Parser.AST.Statements
 {
     public class FunctionDefineStatement : IStatement
     {
-        private string name;
-        private List<string> argNames;
-        public IStatement body;
+        public string Name { get; private set; }
+        public List<string> ArgumentNames { get; private set; }
+        public IStatement Body { get; private set; }
 
-        public FunctionDefineStatement(string name, List<string> argNames, IStatement body)
+        public FunctionDefineStatement(string name, List<string> argumentNames, IStatement body)
         {
-            this.name = name;
-            this.argNames = argNames;
-            this.body = body;
+            Name = name;
+            ArgumentNames = argumentNames;
+            Body = body;
         }
 
         public void Execute()
         {
-            Functions.Set(name, new UserDefineFunction(argNames, body));
+            Functions.Set(Name, new UserDefineFunction(ArgumentNames, Body));
         }
 
         public override string ToString()
         {
-            return $"{name}({argNames.ToStringLine()}) {body}";
+            return $"{Name}({ArgumentNames.ToStringLine()}) {Body}";
         }
     }
 }

@@ -5,11 +5,11 @@ using Mt.Flow.Sharp.Parser.Utils;
 
 namespace Mt.Flow.Sharp.Parser.AST.Expressions
 {
-    public class ArrayExpression : IExpression
+    public class ArrayDaclarationExpression : IExpression
     {
         public List<IExpression> elements;
 
-        public ArrayExpression(List<IExpression> elements)
+        public ArrayDaclarationExpression(List<IExpression> elements)
         {
             this.elements = elements;
         }

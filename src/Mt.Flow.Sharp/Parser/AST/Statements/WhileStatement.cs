@@ -4,13 +4,13 @@ namespace Mt.Flow.Sharp.Parser.AST.Statements
 {
     public class WhileStatement : IStatement
     {
-        public IExpression condition;
-        public IStatement statement;
+        public IExpression Condition { get; private set; }
+        public IStatement Statement { get; private set; }
 
         public WhileStatement(IExpression condition, IStatement statement)
         {
-            this.condition = condition;
-            this.statement = statement;
+            Condition = condition;
+            Statement = statement;
         }
 
         public void Execute()
@@ -34,7 +34,7 @@ namespace Mt.Flow.Sharp.Parser.AST.Statements
 
         public override string ToString()
         {
-            return $"while {condition} {statement}";
+            return $"while {Condition} {Statement}";
         }
     }
 }

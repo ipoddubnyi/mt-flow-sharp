@@ -79,7 +79,7 @@ namespace Mt.Flow.Sharp.Parser.AST.Expressions
 
         public override string ToString()
         {
-            return $"[{expr1} {operation.GetName()} {expr2}]";
+            return $"({expr1} {operation.GetName()} {expr2})";
         }
     }
 }

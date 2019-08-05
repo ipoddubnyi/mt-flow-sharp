@@ -43,10 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compilers\JS\CompilerJs.cs" />
     <Compile Include="Parser\AST\Expressions\ArrayAccessExpression.cs" />
     <Compile Include="Parser\AST\Expressions\FunctionalExpression.cs" />
     <Compile Include="Parser\AST\Statements\ArrayAssignmentStatement.cs" />
-    <Compile Include="Parser\AST\Expressions\ArrayExpression.cs" />
+    <Compile Include="Parser\AST\Expressions\ArrayDaclarationExpression.cs" />
     <Compile Include="Parser\AST\Expressions\BinaryExpression.cs" />
     <Compile Include="Parser\AST\Expressions\ConditionalExpression.cs" />
     <Compile Include="Parser\AST\Expressions\IExpression.cs" />
